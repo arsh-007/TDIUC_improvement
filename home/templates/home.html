@@ -1,0 +1,25 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% load static %}
+<img src="{% static hell %}" alt="My image">
+
+{{q}} : {{a}}
+<!--{{hell}}-->
+<form action="{% url 'home' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" />
+</form>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
